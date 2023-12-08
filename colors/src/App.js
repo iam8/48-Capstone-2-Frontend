@@ -5,7 +5,9 @@ function App() {
     return (
         <div className="App">
             <header className="App-header">
-                Colors App
+                Colors App.
+                Whee, look at all the colors here that don't exist yet!
+                Reminder: find a better app icon to use.
             </header>
         </div>
     );
