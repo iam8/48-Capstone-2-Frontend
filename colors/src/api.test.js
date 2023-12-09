@@ -6,11 +6,6 @@ jest.mock("axios");
 console.log("API TESTS -------------------------------------------------------------------------");
 
 
-test("This is a TEST test", () => {
-    expect(1).toBeTruthy();
-})
-
-
 describe("request()", () => {
     ColorsApi.token = "testtoken";
 
@@ -47,5 +42,36 @@ describe("request()", () => {
             }
         }
     })
-
 })
+
+
+describe("signup()", () => {
+    const data = {
+        username: "USERNAME",
+        password: "PASSWORD",
+        firstName: "FIRSTNAME",
+        lastName: "LASTNAME"
+    };
+
+    const token = "AUTHTOKEN";
+    const resp = {data: {token}};
+
+
+    test("Calls axios with correct arguments and returns token property of result",
+    async () => {
+        axios.mockImplementation(() => Promise.resolve(resp));
+
+        const expArgs = {
+            url: expect.any(String),
+            method: "post",
+            data,
+            headers: {Authorization: expect.any(String)},
+            params: {}
+        }
+
+        const result = await ColorsApi.signup(data);
+        expect(axios).toHaveBeenCalledWith(expArgs);
+        expect(result).toBe(token);
+    })
+})
+
