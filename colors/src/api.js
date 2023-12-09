@@ -11,7 +11,9 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 class ColorsApi {
     static token;
 
-    /** Send request to endpoint via Axios with (optional) data and method. */
+    /**
+     * Send request to endpoint via Axios with (optional) data and method.
+     */
     static async request(endpoint, data={}, method="get") {
 
         // Pass authorization token via request header.
@@ -29,6 +31,28 @@ class ColorsApi {
     }
 
     // Individual API routes ----------------------------------------------------------------------
+
+    /**
+     * Register a new user and return their generated auth token.
+     */
+    static async signup({username, password, firstName, lastName}) {
+        let res = await this.request("auth/register",
+                                     {username, password, firstName, lastName},
+                                     "post");
+
+        return res.token;
+    }
+
+    /**
+     * Log in a user and return their auth token.
+     */
+    static async login({username, password}) {
+        let res = await this.request("auth/token",
+                                     {username, password},
+                                     "post");
+
+        return res.token;
+    }
 }
 
 
