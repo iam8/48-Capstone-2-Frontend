@@ -53,6 +53,64 @@ class ColorsApi {
 
         return res.token;
     }
+
+    /**
+     * Get a user by username.
+     */
+    static async getUser(username) {
+        let res = await this.request(`users/${username}`);
+        return res.user;
+    }
+
+    /**
+     * Save edited user profile info.
+     */
+    static async saveUserData({username, firstName, lastName, password, isAdmin}) {
+        let res = await this.request(`users/${username}`,
+                                     {firstName, lastName, password, isAdmin},
+                                     "patch");
+        return res.user;
+    }
+
+    /**
+     * Delete a user by username.
+     */
+    static async deleteUser(username) {
+        let res = await this.request(`users/${username}`,
+                                     {},
+                                     "delete");
+
+        return res.deleted;
+    }
+
+    /**
+     * Create new collection for current user.
+     */
+
+    /**
+     * Add new color to a collection.
+     */
+
+    /**
+     * Remove a color from a collection.
+     */
+
+    /**
+     * Get info on a collection by ID.
+     */
+
+    /**
+     * Get all collections by a user.
+     */
+
+    /**
+     * Rename a collection by ID.
+     */
+
+    /**
+     * Delete a collection by ID.
+     */
+
 }
 
 
