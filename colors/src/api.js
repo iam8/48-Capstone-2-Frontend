@@ -86,31 +86,73 @@ class ColorsApi {
     /**
      * Create new collection for current user.
      */
+    static async createCollection({title}) {
+        let res = await this.request("collections/",
+                                    {title},
+                                    "post");
+
+        return res.collection;
+    }
 
     /**
      * Add new color to a collection.
      */
+    static async addColor(id, {colorHex}) {
+        let res = await this.request(`collections/${id}`,
+                                     {colorHex},
+                                     "post");
+
+        return res;
+    }
 
     /**
      * Remove a color from a collection.
      */
+    static async removeColor(id, hex) {
+        let res = await this.request(`collections/${id}/colors/${hex}`,
+                                     {},
+                                     "delete");
+
+        return res.deleted;
+    }
 
     /**
      * Get info on a collection by ID.
      */
+    static async getCollection(id) {
+        let res = await this.request(`collections/${id}`);
+        return res.collection;
+    }
 
     /**
      * Get all collections by a user.
      */
+    static async getCollsByUser(username) {
+        let res = await this.request(`collections/users/${username}`);
+        return res.collections;
+    }
 
     /**
      * Rename a collection by ID.
      */
+    static async renameCollection(id, {newTitle}) {
+        let res = await this.request(`collections/${id}`,
+                                     {newTitle},
+                                     "patch");
+
+        return res.updated;
+    }
 
     /**
      * Delete a collection by ID.
      */
+    static async deleteCollection(id) {
+        let res = await this.request(`collections/${id}`,
+                                     {},
+                                     "delete");
 
+        return res.deleted;
+    }
 }
 
 
