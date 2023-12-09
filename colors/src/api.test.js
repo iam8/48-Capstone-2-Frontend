@@ -18,8 +18,11 @@ describe("request()", () => {
         const resp = {data: "test data"};
         axios.mockImplementation(() => Promise.resolve(resp));
 
-        const result = await ColorsApi.request("testendpoint");
-        expect(result).toBe("test data");
+        const result1 = await ColorsApi.request("testendpoint");
+        expect(result1).toBe("test data");
+
+        const result2 = await ColorsApi.request("testendpoint", {field1: "value1"}, "post");
+        expect(result2).toBe("test data");
     })
 
     test("Throws exception with array of error messages on request failure", async () => {
