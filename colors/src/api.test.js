@@ -69,7 +69,7 @@ describe("signup()", () => {
 
         const result = await ColorsApi.signup(data);
         expect(axios).toHaveBeenCalledWith(expArgs);
-        expect(result).toBe(token);
+        expect(result).toEqual(token);
     })
 })
 
@@ -96,29 +96,30 @@ describe("login()", () => {
 
         const result = await ColorsApi.login(data);
         expect(axios).toHaveBeenCalledWith(expArgs);
-        expect(result).toBe(token);
+        expect(result).toEqual(token);
     })
 })
 
 
 describe("getUser()", () => {
-    const user = "USERDATA";
-    const resp = {data: {user}};
+    const username = "USERNAME";
+    const userData = "USERDATA";
+    const resp = {data: {user: userData}};
 
     test("Calls axios with correct arguments and returns user property of result", async () => {
         axios.mockImplementation(() => Promise.resolve(resp));
 
         const expArgs = {
-            url: expect.any(String),
+            url: expect.stringContaining(username),
             method: "get",
             data: {},
             headers: {Authorization: expect.any(String)},
             params: {}
         };
 
-        const result = await ColorsApi.getUser("USERNAME");
+        const result = await ColorsApi.getUser(username);
         expect(axios).toHaveBeenCalledWith(expArgs);
-        expect(result).toBe(user);
+        expect(result).toEqual(userData);
     })
 })
 
@@ -135,14 +136,14 @@ describe("saveUserData()", () => {
     const axiosData = {...reqData};
     delete axiosData.username;
 
-    const user = "USERDATA";
-    const resp = {data: {user}};
+    const userData = "USERDATA";
+    const resp = {data: {user: userData}};
 
     test("Calls axios with correct arguments and returns user property of result", async () => {
         axios.mockImplementation(() => Promise.resolve(resp));
 
         const expArgs = {
-            url: expect.any(String),
+            url: expect.stringContaining(reqData.username),
             method: "patch",
             data: axiosData,
             headers: {Authorization: expect.any(String)},
@@ -151,7 +152,210 @@ describe("saveUserData()", () => {
 
         const result = await ColorsApi.saveUserData(reqData);
         expect(axios).toHaveBeenCalledWith(expArgs);
-        expect(result).toBe(user);
+        expect(result).toEqual(userData);
+    })
+})
+
+
+describe("deleteUser()", () => {
+    const username = "USERNAME";
+    const deleted = "DELETED";
+    const resp = {data: {deleted}};
+
+    test("Calls axios with correct arguments and returns 'deleted' property of result",
+    async () => {
+        axios.mockImplementation(() => Promise.resolve(resp));
+
+        const expArgs = {
+            url: expect.stringContaining(username),
+            method: "delete",
+            data: {},
+            headers: {Authorization: expect.any(String)},
+            params: {}
+        };
+
+        const result = await ColorsApi.deleteUser(username);
+        expect(axios).toHaveBeenCalledWith(expArgs);
+        expect(result).toEqual(deleted);
+    })
+})
+
+
+describe("createCollection()", () => {
+    const data = {
+        title: "TITLE"
+    };
+
+    const collection = "COLLECTION";
+    const resp = {data: {collection}};
+
+    test("Calls axios with correct arguments and returns collection property of result",
+    async () => {
+        axios.mockImplementation(() => Promise.resolve(resp));
+
+        const expArgs = {
+            url: expect.any(String),
+            method: "post",
+            data,
+            headers: {Authorization: expect.any(String)},
+            params: {}
+        };
+
+        const result = await ColorsApi.createCollection(data);
+        expect(axios).toHaveBeenCalledWith(expArgs);
+        expect(result).toEqual(collection);
+    })
+})
+
+
+describe("addColor()", () => {
+    const id = 0;
+    const data = {
+        colorHex: "COLORHEX"
+    };
+
+    const dataRes = "DATARESULT";
+    const resp = {data: dataRes};
+
+    test("Calls axios with correct arguments and returns result", async () => {
+        axios.mockImplementation(() => Promise.resolve(resp));
+
+        const expArgs = {
+            url: expect.stringContaining(`${id}`),
+            method: "post",
+            data,
+            headers: {Authorization: expect.any(String)},
+            params: {}
+        };
+
+        const result = await ColorsApi.addColor(id, data);
+        expect(axios).toHaveBeenCalledWith(expArgs);
+        expect(result).toEqual(dataRes);
+    })
+})
+
+
+describe("removeColor()", () => {
+    const id = 0;
+    const hex = "HEX";
+    const deleted = "DELETED";
+    const resp = {data: {deleted}};
+
+    test("Calls axios with correct arguments and returns 'deleted' property of result",
+    async () => {
+        axios.mockImplementation(() => Promise.resolve(resp));
+
+        const expArgs = {
+            url: expect.stringContaining(`${id}`),
+            method: "delete",
+            data: {},
+            headers: {Authorization: expect.any(String)},
+            params: {}
+        };
+
+        const result = await ColorsApi.removeColor(id, hex);
+        expect(axios).toHaveBeenCalledWith(expArgs);
+        expect(result).toEqual(deleted);
+    })
+})
+
+
+describe("getCollection()", () => {
+    const id = 0;
+    const collection = "COLLECTION";
+    const resp = {data: {collection}};
+
+    test("Calls axios with correct arguments and returns collection property of result",
+    async () => {
+        axios.mockImplementation(() => Promise.resolve(resp));
+
+        const expArgs = {
+            url: expect.stringContaining(`${id}`),
+            method: "get",
+            data: {},
+            headers: {Authorization: expect.any(String)},
+            params: {}
+        };
+
+        const result = await ColorsApi.getCollection(id);
+        expect(axios).toHaveBeenCalledWith(expArgs);
+        expect(result).toEqual(collection);
+    })
+})
+
+
+describe("getCollsByUser()", () => {
+    const username = "USERNAME";
+    const collections = "COLLECTIONS";
+    const resp = {data: {collections}};
+
+    test("Calls axios with correct arguments and returns collections property of result",
+    async () => {
+        axios.mockImplementation(() => Promise.resolve(resp));
+
+        const expArgs = {
+            url: expect.stringContaining(username),
+            method: "get",
+            data: {},
+            headers: {Authorization: expect.any(String)},
+            params: {}
+        };
+
+        const result = await ColorsApi.getCollsByUser(username);
+        expect(axios).toHaveBeenCalledWith(expArgs);
+        expect(result).toEqual(collections);
+    })
+})
+
+
+describe("renameCollection()", () => {
+    const id = 0;
+    const titleData = {
+        newTitle: "NEWTITLE"
+    };
+
+    const updated = "UPDATED";
+    const resp = {data: {updated}};
+
+    test("Calls axios with correct arguments and returns 'updated' property of result",
+    async () => {
+        axios.mockImplementation(() => Promise.resolve(resp));
+
+        const expArgs = {
+            url: expect.stringContaining(`${id}`),
+            method: "patch",
+            data: titleData,
+            headers: {Authorization: expect.any(String)},
+            params: {}
+        };
+
+        const result = await ColorsApi.renameCollection(id, titleData);
+        expect(axios).toHaveBeenCalledWith(expArgs);
+        expect(result).toEqual(updated);
+    })
+})
+
+
+describe("deleteCollection()", () => {
+    const id = 0;
+    const deleted = "DELETED";
+    const resp = {data: {deleted}};
+
+    test("Calls axios with correct arguments and returns 'deleted' property of result",
+    async () => {
+        axios.mockImplementation(() => Promise.resolve(resp));
+
+        const expArgs = {
+            url: expect.stringContaining(`${id}`),
+            method: "delete",
+            data: {},
+            headers: {Authorization: expect.any(String)},
+            params: {}
+        };
+
+        const result = await ColorsApi.deleteCollection(id);
+        expect(axios).toHaveBeenCalledWith(expArgs);
+        expect(result).toEqual(deleted);
     })
 })
 
