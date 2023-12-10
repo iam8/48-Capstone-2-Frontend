@@ -56,9 +56,7 @@ describe("signup()", () => {
     const token = "AUTHTOKEN";
     const resp = {data: {token}};
 
-
-    test("Calls axios with correct arguments and returns token property of result",
-    async () => {
+    test("Calls axios with correct arguments and returns token property of result", async () => {
         axios.mockImplementation(() => Promise.resolve(resp));
 
         const expArgs = {
@@ -67,11 +65,93 @@ describe("signup()", () => {
             data,
             headers: {Authorization: expect.any(String)},
             params: {}
-        }
+        };
 
         const result = await ColorsApi.signup(data);
         expect(axios).toHaveBeenCalledWith(expArgs);
         expect(result).toBe(token);
+    })
+})
+
+
+describe("login()", () => {
+    const data = {
+        username: "USERNAME",
+        password: "PASSWORD"
+    };
+
+    const token = "AUTHTOKEN";
+    const resp = {data: {token}};
+
+    test("Calls axios with correct arguments and returns token property of result", async () => {
+        axios.mockImplementation(() => Promise.resolve(resp));
+
+        const expArgs = {
+            url: expect.any(String),
+            method: "post",
+            data,
+            headers: {Authorization: expect.any(String)},
+            params: {}
+        };
+
+        const result = await ColorsApi.login(data);
+        expect(axios).toHaveBeenCalledWith(expArgs);
+        expect(result).toBe(token);
+    })
+})
+
+
+describe("getUser()", () => {
+    const user = "USERDATA";
+    const resp = {data: {user}};
+
+    test("Calls axios with correct arguments and returns user property of result", async () => {
+        axios.mockImplementation(() => Promise.resolve(resp));
+
+        const expArgs = {
+            url: expect.any(String),
+            method: "get",
+            data: {},
+            headers: {Authorization: expect.any(String)},
+            params: {}
+        };
+
+        const result = await ColorsApi.getUser("USERNAME");
+        expect(axios).toHaveBeenCalledWith(expArgs);
+        expect(result).toBe(user);
+    })
+})
+
+
+describe("saveUserData()", () => {
+    const reqData = {
+        username: "USERNAME",
+        password: "PASSWORD",
+        firstName: "FIRSTNAME",
+        lastName: "LASTNAME",
+        isAdmin: true
+    };
+
+    const axiosData = {...reqData};
+    delete axiosData.username;
+
+    const user = "USERDATA";
+    const resp = {data: {user}};
+
+    test("Calls axios with correct arguments and returns user property of result", async () => {
+        axios.mockImplementation(() => Promise.resolve(resp));
+
+        const expArgs = {
+            url: expect.any(String),
+            method: "patch",
+            data: axiosData,
+            headers: {Authorization: expect.any(String)},
+            params: {}
+        };
+
+        const result = await ColorsApi.saveUserData(reqData);
+        expect(axios).toHaveBeenCalledWith(expArgs);
+        expect(result).toBe(user);
     })
 })
 
