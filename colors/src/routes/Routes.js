@@ -1,8 +1,16 @@
 import React from "react";
-import {Route, Switch, Redirect} from "react-router-dom";
+import {BrowserRouter, Route, Switch, Redirect} from "react-router-dom";
 
 import ProtectedRoute from "./ProtectedRoute";
 
+
+function SampleText() {
+    return (
+        <div>
+            Sample text here!
+        </div>
+    );
+}
 
 /**
  * All routes for Colors website.
@@ -16,20 +24,56 @@ import ProtectedRoute from "./ProtectedRoute";
  *  - /schemes/:id
  *  - /collections/:id
  *  - /collections
+ *  - /profile
  *  - /signup
  *  - /login
- *  - /profile
  *  - /
  *
  * Non-matching URLs will redirect to / (home).
  */
-function Routes({login, signup}) {
+function Routes() {
 
     return (
-        <Switch>
+        <BrowserRouter>
+            <Switch>
+                <Route path="/colors/:hex">
+                    <SampleText />
+                    <div>Colors page (by hex)</div>
+                </Route>
 
-            <Redirect to="/" />
-        </Switch>
+                <Route path="/schemes/:id">
+                    <div>
+                        Schemes page (by ID)
+                    </div>
+                </Route>
+
+                <Route path="/collections/:id">
+                    <div>Collections page (by ID)</div>
+                </Route>
+
+                <Route path="/collections">
+                    <div>All collections page</div>
+                </Route>
+
+                <Route path="/profile">
+                    <div>Profile edit page</div>
+                </Route>
+
+                <Route path="/signup">
+                    <div>Signup page</div>
+                </Route>
+
+                <Route path="/login">
+                    <div>Login page</div>
+                </Route>
+
+                <Route path="/">
+                    <div>Homepage</div>
+                </Route>
+
+                <Redirect to="/" />
+            </Switch>
+        </BrowserRouter>
     )
 }
 
