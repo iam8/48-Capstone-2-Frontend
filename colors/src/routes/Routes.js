@@ -61,7 +61,7 @@ function Routes({login, signup}) {
             </Route>
 
             <Route path="/login">
-                <LoginForm />
+                <LoginForm login={login}/>
             </Route>
 
             <Route path="/">
