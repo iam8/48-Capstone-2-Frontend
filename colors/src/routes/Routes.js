@@ -48,15 +48,21 @@ function Routes() {
                 </Route>
 
                 <Route path="/collections/:id">
-                    <div>Collections page (by ID)</div>
+                    <ProtectedRoute>
+                        <div>Collections page (by ID)</div>
+                    </ProtectedRoute>
                 </Route>
 
                 <Route path="/collections">
-                    <div>All collections page</div>
+                    <ProtectedRoute>
+                        <div>All collections page</div>
+                    </ProtectedRoute>
                 </Route>
 
                 <Route path="/profile">
-                    <div>Profile edit page</div>
+                    <ProtectedRoute>
+                        <div>Profile edit page</div>
+                    </ProtectedRoute>
                 </Route>
 
                 <Route path="/signup">
