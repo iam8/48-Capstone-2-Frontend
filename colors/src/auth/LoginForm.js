@@ -26,7 +26,7 @@ function LoginForm({login}) {
 
     /** Handle changes to inputs. */
     const handleChange = (evt) => {
-        const [name, value] = evt.target;
+        const {name, value} = evt.target;
         setFormErrors([]);
         setFormData((formData) => ({
             ...formData,
@@ -60,6 +60,38 @@ function LoginForm({login}) {
     return (
         <div className="LoginForm">
             <h2>Log In</h2>
+
+            <Card>
+                <CardBody>
+                    <Form onSubmit={handleSubmit}>
+                        <FormGroup>
+                            <Label htmlFor="username">Username</Label>
+                            <Input
+                                id="username"
+                                name="username"
+                                type="text"
+                                value={formData.username}
+                                onChange={handleChange}
+                            />
+                        </FormGroup>
+
+                        <FormGroup>
+                            <Label htmlFor="password">Password</Label>
+                            <Input
+                                id="password"
+                                name="password"
+                                type="password"
+                                value={formData.password}
+                                onChange={handleChange}
+                            />
+                        </FormGroup>
+
+                        {renderAlert()}
+
+                        <Button color="primary" block>Submit</Button>
+                    </Form>
+                </CardBody>
+            </Card>
         </div>
     )
 }
