@@ -35,8 +35,27 @@ function LoginForm({login}) {
     }
 
     /** Form submission - log in user and redirect to home on success. */
+    const handleSubmit = async (evt) => {
+        evt.preventDefault();
+        const result = await login(formData);
+
+        if (result.success) {
+            history.push("/");  // Redirect to homepage
+        } else {
+            setFormErrors(result.err);
+        }
+    }
 
     /** Show an alert message on failure to log in. */
+    const renderAlert = () => {
+        if (formErrors.length) {
+            return (
+                <Alert color="danger">
+                    Login failed - {formErrors}
+                </Alert>
+            );
+        }
+    }
 
     return (
         <div className="LoginForm">
