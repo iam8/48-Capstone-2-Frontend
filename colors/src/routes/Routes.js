@@ -2,6 +2,7 @@ import React from "react";
 import {Route, Switch, Redirect} from "react-router-dom";
 
 import ProtectedRoute from "./ProtectedRoute";
+import LoginForm from "../auth/LoginForm";
 
 
 /**
@@ -60,7 +61,7 @@ function Routes({login, signup}) {
             </Route>
 
             <Route path="/login">
-                <div>Login page</div>
+                <LoginForm />
             </Route>
 
             <Route path="/">
