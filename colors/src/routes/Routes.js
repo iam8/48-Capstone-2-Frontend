@@ -31,7 +31,7 @@ function SampleText() {
  *
  * Non-matching URLs will redirect to / (home).
  */
-function Routes() {
+function Routes({login, signup}) {
 
     return (
         <BrowserRouter>
