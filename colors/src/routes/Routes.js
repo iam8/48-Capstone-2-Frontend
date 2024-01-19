@@ -4,14 +4,6 @@ import {BrowserRouter, Route, Switch, Redirect} from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 
 
-function SampleText() {
-    return (
-        <div>
-            Sample text here!
-        </div>
-    );
-}
-
 /**
  * All routes for Colors website.
  *
@@ -37,7 +29,6 @@ function Routes({login, signup}) {
         <BrowserRouter>
             <Switch>
                 <Route path="/colors/:hex">
-                    <SampleText />
                     <div>Colors page (by hex)</div>
                 </Route>
 
