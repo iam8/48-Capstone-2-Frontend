@@ -12,7 +12,9 @@ import { UserContext } from "../auth/UserContext";
  * Created with guidance from this post: https://www.robinwieruch.de/react-router-private-routes/
  */
 function ProtectedRoute({children}) {
-    const currentUser = useContext(UserContext);
+    const {currentUser} = useContext(UserContext);
+
+    console.log("PROTECTED ROUTE: CURRENT USER IS:", currentUser);
 
     if (!currentUser) return <Redirect to="/login" />
 
