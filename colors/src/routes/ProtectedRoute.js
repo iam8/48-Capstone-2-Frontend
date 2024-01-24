@@ -14,8 +14,6 @@ import { UserContext } from "../auth/UserContext";
 function ProtectedRoute({children}) {
     const {currentUser} = useContext(UserContext);
 
-    console.log("PROTECTED ROUTE: CURRENT USER IS:", currentUser);
-
     if (!currentUser) return <Redirect to="/login" />
 
     return children;
