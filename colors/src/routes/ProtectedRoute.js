@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import {Redirect} from "react-router-dom";
 
-import { UserContext } from "../auth/UserContext";
+import UserContext from "../auth/UserContext";
 
 
 /** Wrapper component. Wrap this around components only meant to be viewed by users who are logged
