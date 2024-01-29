@@ -2,6 +2,7 @@ import React from "react";
 import {Route, Switch, Redirect} from "react-router-dom";
 
 import ProtectedRoute from "./ProtectedRoute";
+import SignupForm from "../auth/SignupForm";
 import LoginForm from "../auth/LoginForm";
 
 
@@ -57,7 +58,7 @@ function Routes({login, signup}) {
             </Route>
 
             <Route path="/signup">
-                <div>Signup page</div>
+                <SignupForm signup={signup}/>
             </Route>
 
             <Route path="/login">
