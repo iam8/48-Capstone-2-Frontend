@@ -59,6 +59,22 @@ function App() {
     }, [token]);
 
     /**
+     * Sign up user with given user data: {username, password, firstName, lastName}.
+     *
+     * Return (success: true) on success and {success: false, err} on failure.
+     */
+    async function signup(userData) {
+        try {
+            const token = await ColorsApi.signup(userData);
+            setToken(token);
+            return {success: true};
+        } catch(err) {
+            console.log("ERROR SIGNING UP:", err);
+            return {success: false, err};
+        }
+    }
+
+    /**
      * Log in user with given user data: {username, password}.
      *
      * Return {success: true} on success and {success: false, err} on failure.
@@ -95,7 +111,7 @@ function App() {
                         {currentUser ? currentUser.username : "null"}, {token}
                     </header>
 
-                    <Routes login={login}/>
+                    <Routes login={login} signup={signup}/>
                 </UserContext.Provider>
             </BrowserRouter>
         </div>
