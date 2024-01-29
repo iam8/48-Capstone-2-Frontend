@@ -82,7 +82,7 @@ function SignupForm({signup}) {
                             <Input
                                 id="password"
                                 name="password"
-                                type="text"
+                                type="password"
                                 value={formData.password}
                                 onChange={handleChange}
                             />
