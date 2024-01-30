@@ -2,8 +2,50 @@ import React from "react";
 import {Route, Switch, Redirect} from "react-router-dom";
 
 import ProtectedRoute from "./ProtectedRoute";
-import SignupForm from "../auth/SignupForm";
-import LoginForm from "../auth/LoginForm";
+import UserAuthForm from "../auth/UserAuthForm";
+
+
+const SIGNUP_FIELDS = [
+    {
+        id: "username",
+        initVal: "",
+        labelText: "Username",
+        inputType: "text"
+    },
+    {
+        id: "password",
+        initVal: "",
+        labelText: "Password",
+        inputType: "password"
+    },
+    {
+        id: "firstName",
+        initVal: "",
+        labelText: "First name",
+        inputType: "text"
+    },
+    {
+        id: "lastName",
+        initVal: "",
+        labelText: "Last name",
+        inputType: "text"
+    }
+];
+
+const LOGIN_FIELDS = [
+    {
+        id: "username",
+        initVal: "",
+        labelText: "Username",
+        inputType: "text"
+    },
+    {
+        id: "password",
+        initVal: "",
+        labelText: "Password",
+        inputType: "password"
+    }
+];
 
 
 /**
@@ -58,11 +100,11 @@ function Routes({login, signup}) {
             </Route>
 
             <Route path="/signup">
-                <SignupForm signup={signup}/>
+                <UserAuthForm title={"Sign In"} fieldInfo={SIGNUP_FIELDS} action={signup}/>
             </Route>
 
             <Route path="/login">
-                <LoginForm login={login}/>
+                <UserAuthForm title={"Log In"} fieldInfo={LOGIN_FIELDS} action={login}/>
             </Route>
 
             <Route path="/">
