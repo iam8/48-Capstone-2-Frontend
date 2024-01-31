@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {BrowserRouter} from "react-router-dom";
 import {jwtDecode} from "jwt-decode";
+import { Link } from 'react-router-dom';
 
 import ColorsApi from './api';
 import Routes from './routes/Routes';
@@ -112,6 +113,8 @@ function App() {
                     </header>
 
                     <Routes login={login} signup={signup}/>
+
+                    <Link to="/login" onClick={logout}>Logout (temporary)</Link>
                 </UserContext.Provider>
             </BrowserRouter>
         </div>
