@@ -3,49 +3,7 @@ import {Route, Switch, Redirect} from "react-router-dom";
 
 import ProtectedRoute from "./ProtectedRoute";
 import UserAuthForm from "../auth/UserAuthForm";
-
-
-const SIGNUP_FIELDS = [
-    {
-        id: "username",
-        initVal: "",
-        labelText: "Username",
-        inputType: "text"
-    },
-    {
-        id: "password",
-        initVal: "",
-        labelText: "Password",
-        inputType: "password"
-    },
-    {
-        id: "firstName",
-        initVal: "",
-        labelText: "First name",
-        inputType: "text"
-    },
-    {
-        id: "lastName",
-        initVal: "",
-        labelText: "Last name",
-        inputType: "text"
-    }
-];
-
-const LOGIN_FIELDS = [
-    {
-        id: "username",
-        initVal: "",
-        labelText: "Username",
-        inputType: "text"
-    },
-    {
-        id: "password",
-        initVal: "",
-        labelText: "Password",
-        inputType: "password"
-    }
-];
+import { SIGNUP_FIELDS, LOGIN_FIELDS } from "../auth/formFieldsInfo";
 
 
 /**
