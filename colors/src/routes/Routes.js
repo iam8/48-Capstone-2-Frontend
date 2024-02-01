@@ -27,6 +27,7 @@ import useQuery from "../hooks/useQuery";
  * Non-matching URLs will redirect to / (home).
  */
 function Routes({login, signup}) {
+    const query = useQuery();
 
     return (
         <Switch>
@@ -42,11 +43,13 @@ function Routes({login, signup}) {
                 </ProtectedRoute>
             </Route>
 
-            <Route exact path="/colors/?hex=ffffff&rgb=255,255,255">
+            <Route path="/colors">
                 <div>Search for a color here!</div>
+                <div>Is there a query string? {query.size ? "yes" : "no"}</div>
+                <div>Query string result, from useQuery(): {query.toString()}</div>
             </Route>
 
-            <Route path="/schemes/?param1=111&param2=222&param3=333">
+            <Route path="/schemes">
                 <div>Search for a scheme here!</div>
             </Route>
 
