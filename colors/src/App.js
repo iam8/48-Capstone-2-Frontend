@@ -114,7 +114,17 @@ function App() {
 
                     <Routes login={login} signup={signup}/>
 
-                    <Link to="/login" onClick={logout}>Logout (temporary)</Link>
+                    <div>
+                        <Link to="/colors">Click here to visit colors search page!</Link>
+                    </div>
+                    <div>
+                        <Link to="/colors/?hex=AABBCC">
+                            Click here to visit a color's page, specified in query string!
+                        </Link>
+                    </div>
+                    <div>
+                        <Link to="/login" onClick={logout}>Logout (temporary)</Link>
+                    </div>
                 </UserContext.Provider>
             </BrowserRouter>
         </div>
