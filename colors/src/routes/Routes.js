@@ -29,16 +29,6 @@ function Routes({login, signup}) {
 
     return (
         <Switch>
-            <Route path="/colors/:hex">
-                <div>Colors page (by hex)</div>
-            </Route>
-
-            <Route path="/schemes/:id">
-                <div>
-                    Schemes page (by ID)
-                </div>
-            </Route>
-
             <Route path="/collections/:id">
                 <ProtectedRoute>
                     <div>Collections page (by ID)</div>
@@ -49,6 +39,14 @@ function Routes({login, signup}) {
                 <ProtectedRoute>
                     <div>All collections page</div>
                 </ProtectedRoute>
+            </Route>
+
+            <Route exact path="/colors">
+                <div>Search for a color here!</div>
+            </Route>
+
+            <Route path="/schemes">
+                <div>Search for a scheme here!</div>
             </Route>
 
             <Route path="/profile">
