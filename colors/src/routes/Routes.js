@@ -4,6 +4,7 @@ import {Route, Switch, Redirect} from "react-router-dom";
 import ProtectedRoute from "./ProtectedRoute";
 import UserAuthForm from "../auth/UserAuthForm";
 import { SIGNUP_FIELDS, LOGIN_FIELDS } from "../auth/formFieldsInfo";
+import useQuery from "../hooks/useQuery";
 
 
 /**
@@ -14,10 +15,10 @@ import { SIGNUP_FIELDS, LOGIN_FIELDS } from "../auth/formFieldsInfo";
  *  - signup(): register a new user; passed by parent
  *
  * Route list:
- *  - /colors/:hex
- *  - /schemes/:id
  *  - /collections/:id
  *  - /collections
+ *  - /colors
+ *  - /schemes
  *  - /profile
  *  - /signup
  *  - /login
@@ -41,11 +42,11 @@ function Routes({login, signup}) {
                 </ProtectedRoute>
             </Route>
 
-            <Route exact path="/colors">
+            <Route exact path="/colors/?hex=ffffff&rgb=255,255,255">
                 <div>Search for a color here!</div>
             </Route>
 
-            <Route path="/schemes">
+            <Route path="/schemes/?param1=111&param2=222&param3=333">
                 <div>Search for a scheme here!</div>
             </Route>
 
