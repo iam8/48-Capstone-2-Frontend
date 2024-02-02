@@ -45,12 +45,14 @@ function Routes({login, signup}) {
 
             <Route path="/colors">
                 <div>Search for a color here!</div>
+                <br></br>
                 <div>Is there a query string? {query.size ? "yes" : "no"}</div>
                 <div>Query string result, from useQuery(): {query.toString()}</div>
             </Route>
 
             <Route path="/schemes">
                 <div>Search for a scheme here!</div>
+                <br></br>
                 <div>Is there a query string? {query.size ? "yes" : "no"}</div>
                 <div>Query string result, from useQuery(): {query.toString()}</div>
             </Route>
