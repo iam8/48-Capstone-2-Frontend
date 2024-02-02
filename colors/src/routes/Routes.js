@@ -44,17 +44,27 @@ function Routes({login, signup}) {
             </Route>
 
             <Route path="/colors">
+                <br></br>
                 <div>Search for a color here!</div>
                 <br></br>
                 <div>Is there a query string? {query.size ? "yes" : "no"}</div>
+                {query.size ?
+                    "Since there is a query string, render the color info!" :
+                    "Since there is no query string, render only the search bar!"}
                 <div>Query string result, from useQuery(): {query.toString()}</div>
+                <br></br>
             </Route>
 
             <Route path="/schemes">
+                <br></br>
                 <div>Search for a scheme here!</div>
                 <br></br>
                 <div>Is there a query string? {query.size ? "yes" : "no"}</div>
+                {query.size ?
+                    "Since there is a query string, render the scheme info!" :
+                    "Since there is no query string, render only the search bar!"}
                 <div>Query string result, from useQuery(): {query.toString()}</div>
+                <br></br>
             </Route>
 
             <Route path="/profile">
