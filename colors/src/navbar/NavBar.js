@@ -56,6 +56,14 @@ function NavBar({logout}) {
                     </NavLink>
 
                     <Nav>
+                        <NavItem>
+                            <NavLink to="/colors">Color search</NavLink>
+                        </NavItem>
+
+                        <NavItem>
+                            <NavLink to="/schemes">Scheme search</NavLink>
+                        </NavItem>
+
                         {currentUser ? loggedInNavbar() : loggedOutNavbar()}
                     </Nav>
                 </Navbar>
