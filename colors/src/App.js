@@ -122,6 +122,17 @@ function App() {
                             Click here to visit a color's page, specified in query string!
                         </Link>
                     </div>
+
+                    <div>
+                        <Link to="/schemes">Click here to visit schemes search page!</Link>
+                    </div>
+                    <div>
+                        <Link to="/schemes/?hex=24B1E0&mode=triad&count=6">
+                            Click here to visit a scheme's page, with args specified in query
+                            string!
+                        </Link>
+                    </div>
+
                     <div>
                         <Link to="/login" onClick={logout}>Logout (temporary)</Link>
                     </div>
