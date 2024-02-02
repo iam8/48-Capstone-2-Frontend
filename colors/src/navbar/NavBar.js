@@ -15,30 +15,53 @@ import UserContext from "../auth/UserContext";
  */
 function NavBar({logout}) {
     const {currentUser} = useContext(UserContext);
+    console.log("Current user:", currentUser);
 
     /** Logged-out appearance for navbar */
     function loggedOutNavbar() {
+        return <>
+            <NavItem>
+                <NavLink to="/signup">Sign up</NavLink>
+            </NavItem>
 
+            <NavItem>
+                <NavLink to="/login">Log in</NavLink>
+            </NavItem>
+        </>
     }
 
     /** Logged-in appearance for navbar */
     function loggedInNavbar() {
+        return <>
+            <NavItem>
+                <NavLink to="/collections">My collections</NavLink>
+            </NavItem>
 
+            <NavItem>
+                <NavLink to="/profile">Profile ({currentUser.username})</NavLink>
+            </NavItem>
+
+            <NavItem>
+                <NavLink to="/" onClick={logout}>Log out</NavLink>
+            </NavItem>
+        </>
     }
 
     return (
-        <div className="NavBar">
-            <NavBar>
-                <NavLink exact to="/" className="navbar-brand">
-                    Colors
-                </NavLink>
+        <>
+            <div className="NavBar">
+                <Navbar>
+                    <NavLink exact to="/" className="navbar-brand">
+                        Home
+                    </NavLink>
 
-                <Nav>
-                    {currentUser ? loggedInNavbar() : loggedOutNavbar()}
-                </Nav>
-            </NavBar>
-        </div>
-    )
+                    <Nav>
+                        {currentUser ? loggedInNavbar() : loggedOutNavbar()}
+                    </Nav>
+                </Navbar>
+            </div>
+        </>
+    );
 }
 
 
