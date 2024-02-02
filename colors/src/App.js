@@ -106,10 +106,10 @@ function App() {
             <BrowserRouter>
                 <UserContext.Provider value={{currentUser}}>
                     <header className="App-header">
-                        Colors App.
-                        Whee, look at all the colors here that don't exist yet!
+                        Colors App. <br></br>
+                        Whee, look at all the colors here that don't exist yet! <br></br>
                         Current user and token:
-                        {currentUser ? currentUser.username : "null"}, {token}
+                        {} {currentUser ? currentUser.username : "null"}, {token}
                     </header>
 
                     <Routes login={login} signup={signup}/>
