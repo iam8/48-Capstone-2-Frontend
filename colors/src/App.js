@@ -7,6 +7,7 @@ import ColorsApi from './api';
 import Routes from './routes/Routes';
 import UserContext from './auth/UserContext';
 import useLocalStorage from './hooks/useLocalStorage';
+import NavBar from './navbar/NavBar';
 import './App.css';
 
 // Temp storage: token for 'example1':
@@ -30,8 +31,6 @@ function App() {
     const [isUserLoaded, setIsUserLoaded] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
     const [token, setToken] = useLocalStorage("colors-token");
-    // const [token, setToken] = useState(null);
-
 
     useEffect(() => {
 
@@ -112,6 +111,7 @@ function App() {
                         {} {currentUser ? currentUser.username : "null"}, {token}
                     </header>
 
+                    <NavBar logout={logout}/>
                     <Routes login={login} signup={signup}/>
 
                     <div>
