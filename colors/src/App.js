@@ -1,14 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {BrowserRouter} from "react-router-dom";
 import {jwtDecode} from "jwt-decode";
-import { Link } from 'react-router-dom';
 
 import ColorsApi from './api';
 import Routes from './routes/Routes';
 import UserContext from './auth/UserContext';
 import useLocalStorage from './hooks/useLocalStorage';
 import NavBar from './navbar/NavBar';
-import './App.css';
 
 
 /**
