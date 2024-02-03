@@ -74,7 +74,7 @@ function Routes({login, signup}) {
             </Route>
 
             <Route path="/signup">
-                <UserAuthForm title={"Sign In"} fieldInfo={SIGNUP_FIELDS} action={signup}/>
+                <UserAuthForm title={"Sign Up"} fieldInfo={SIGNUP_FIELDS} action={signup}/>
             </Route>
 
             <Route path="/login">
