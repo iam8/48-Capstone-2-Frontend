@@ -52,7 +52,7 @@ function NavBar({logout}) {
             <div className="NavBar">
                 <Navbar>
                     <NavLink exact to="/" className="navbar-brand">
-                        Home
+                        Colors
                     </NavLink>
 
                     <Nav>
