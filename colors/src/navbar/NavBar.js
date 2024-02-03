@@ -1,8 +1,9 @@
 import React, {useContext} from "react";
-import {NavLink} from "react-router-dom";
-import {Navbar, NavbarBrand, Nav, NavItem} from "reactstrap";
+import {NavLink, Link} from "react-router-dom";
+import {Navbar, Nav, NavItem} from "reactstrap";
 
 import UserContext from "../auth/UserContext";
+import "./NavBar.css";
 
 
 /**
@@ -15,7 +16,6 @@ import UserContext from "../auth/UserContext";
  */
 function NavBar({logout}) {
     const {currentUser} = useContext(UserContext);
-    console.log("Current user:", currentUser);
 
     /** Logged-out appearance for navbar */
     function loggedOutNavbar() {
@@ -42,7 +42,7 @@ function NavBar({logout}) {
             </NavItem>
 
             <NavItem>
-                <NavLink to="/" onClick={logout}>Log out</NavLink>
+                <Link to="/" onClick={logout}>Log out</Link>
             </NavItem>
         </>
     }
@@ -51,9 +51,9 @@ function NavBar({logout}) {
         <>
             <div className="NavBar">
                 <Navbar>
-                    <NavbarBrand href="/" className="navbar-brand">
+                    <NavLink exact to="/" className="navbar-brand">
                         Home
-                    </NavbarBrand>
+                    </NavLink>
 
                     <Nav>
                         <NavItem>
