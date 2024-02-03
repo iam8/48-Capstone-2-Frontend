@@ -10,12 +10,6 @@ import useLocalStorage from './hooks/useLocalStorage';
 import NavBar from './navbar/NavBar';
 import './App.css';
 
-// Temp storage: token for 'example1':
-const token1 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImV4YW1wbGUxIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNzA2MDU4Mzc3fQ.e0xc3kYuE5FhO2Eigppt05PPHLb-Z_-SplFCF0eiQ6o";
-
-// Temp storage: token for 'example2':
-const token2 = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6ImV4YW1wbGUyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTcwNjA1ODQwMn0.p6M7oXf4ZFklieowbVxnlC_xaiy3MKVMQhex58oHV2o";
-
 
 /**
  * Colors application.
@@ -104,38 +98,10 @@ function App() {
         <div className="App">
             <BrowserRouter>
                 <UserContext.Provider value={{currentUser}}>
-                    <header className="App-header">
-                        Colors App. <br></br>
-                        Whee, look at all the colors here that don't exist yet! <br></br>
-                        Current user and token:
-                        {} {currentUser ? currentUser.username : "null"}, {token}
-                    </header>
 
                     <NavBar logout={logout}/>
                     <Routes login={login} signup={signup}/>
 
-                    <div>
-                        <Link to="/colors">Click here to visit colors search page!</Link>
-                    </div>
-                    <div>
-                        <Link to="/colors/?hex=AABBCC">
-                            Click here to visit a color's page, specified in query string!
-                        </Link>
-                    </div>
-
-                    <div>
-                        <Link to="/schemes">Click here to visit schemes search page!</Link>
-                    </div>
-                    <div>
-                        <Link to="/schemes/?hex=24B1E0&mode=triad&count=6">
-                            Click here to visit a scheme's page, with args specified in query
-                            string!
-                        </Link>
-                    </div>
-
-                    <div>
-                        <Link to="/login" onClick={logout}>Logout (temporary)</Link>
-                    </div>
                 </UserContext.Provider>
             </BrowserRouter>
         </div>
