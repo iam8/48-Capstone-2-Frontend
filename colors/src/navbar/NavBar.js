@@ -1,6 +1,6 @@
 import React, {useContext} from "react";
-import {NavLink, Link} from "react-router-dom";
-import {Navbar, Nav, NavItem} from "reactstrap";
+import {NavLink} from "react-router-dom";
+import {Navbar, NavbarBrand, Nav, NavItem} from "reactstrap";
 
 import UserContext from "../auth/UserContext";
 
@@ -51,9 +51,9 @@ function NavBar({logout}) {
         <>
             <div className="NavBar">
                 <Navbar>
-                    <NavLink exact to="/" className="navbar-brand">
+                    <NavbarBrand href="/" className="navbar-brand">
                         Home
-                    </NavLink>
+                    </NavbarBrand>
 
                     <Nav>
                         <NavItem>
