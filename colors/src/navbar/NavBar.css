@@ -4,12 +4,12 @@ nav {
 }
 
 .nav {
-    background-color: orange;
+    /* background-color: orange; */
     margin-right: 10px;
 }
 
 .nav-item {
-    background-color: yellow;
+    /* background-color: yellow; */
     margin-left: 40px;
     text-align: center;
 }
@@ -27,25 +27,25 @@ nav a.active {
 }
 
 nav a.active:hover {
-    color: grey !important;
+    color: blue !important;
 }
 
 nav a:hover {
     text-decoration: none;
-    color: grey;
+    color: blue;
 }
 
 nav a.active.navbar-brand {
-    color: grey;
+    color: blue;
     border-bottom: none;
 }
 
 nav a.navbar-brand {
-    color: grey;
+    color: blue;
 }
 
 nav a.navbar-brand:hover {
-    color: grey;
+    color: blue;
 }
 
 nav a:not(.navbar-brand):hover {
