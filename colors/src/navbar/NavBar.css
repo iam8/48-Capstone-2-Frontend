@@ -1,0 +1,54 @@
+nav {
+    background-color: aquamarine;
+    height: 60px;
+}
+
+.nav {
+    background-color: orange;
+    margin-right: 10px;
+}
+
+.nav-item {
+    background-color: yellow;
+    margin-left: 40px;
+    text-align: center;
+}
+
+nav a {
+    color: black;
+    text-decoration: none;
+}
+
+nav a.active {
+    color: black;
+    font-weight: bold;
+    border-bottom: 3px solid;
+    box-sizing: border-box;
+}
+
+nav a.active:hover {
+    color: grey !important;
+}
+
+nav a:hover {
+    text-decoration: none;
+    color: grey;
+}
+
+nav a.active.navbar-brand {
+    color: grey;
+    border-bottom: none;
+}
+
+nav a.navbar-brand {
+    color: grey;
+}
+
+nav a.navbar-brand:hover {
+    color: grey;
+}
+
+nav a:not(.navbar-brand):hover {
+    font-weight: bold;
+}
+
