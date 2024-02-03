@@ -33,19 +33,19 @@ function Routes({login, signup}) {
         <Switch>
             <Route path="/collections/:id">
                 <ProtectedRoute>
-                    <div>Collections page (by ID)</div>
+                    <h1>Collections page (by ID)</h1>
                 </ProtectedRoute>
             </Route>
 
             <Route path="/collections">
                 <ProtectedRoute>
-                    <div>All collections page</div>
+                    <h1>All collections page</h1>
                 </ProtectedRoute>
             </Route>
 
             <Route path="/colors">
                 <br></br>
-                <div>Search for a color here!</div>
+                <h1>Search for a color here!</h1>
                 <br></br>
                 <div>Is there a query string? {query.size ? "yes" : "no"}</div>
                 {query.size ?
@@ -57,7 +57,7 @@ function Routes({login, signup}) {
 
             <Route path="/schemes">
                 <br></br>
-                <div>Search for a scheme here!</div>
+                <h1>Search for a scheme here!</h1>
                 <br></br>
                 <div>Is there a query string? {query.size ? "yes" : "no"}</div>
                 {query.size ?
@@ -69,7 +69,7 @@ function Routes({login, signup}) {
 
             <Route path="/profile">
                 <ProtectedRoute>
-                    <div>Profile edit page</div>
+                    <h1>Profile edit page</h1>
                 </ProtectedRoute>
             </Route>
 
@@ -82,7 +82,7 @@ function Routes({login, signup}) {
             </Route>
 
             <Route path="/">
-                <div>Homepage</div>
+                <h1>Homepage</h1>
             </Route>
 
             <Redirect to="/" />
