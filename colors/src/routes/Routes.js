@@ -3,6 +3,7 @@ import {Route, Switch, Redirect} from "react-router-dom";
 
 import ProtectedRoute from "./ProtectedRoute";
 import UserAuthForm from "../auth/UserAuthForm";
+import EditProfileForm from "../profile/EditProfileForm";
 import { SIGNUP_FIELDS, LOGIN_FIELDS } from "../auth/formFieldsInfo";
 import useQuery from "../hooks/useQuery";
 
@@ -69,7 +70,7 @@ function Routes({login, signup}) {
 
             <Route path="/profile">
                 <ProtectedRoute>
-                    <h1>Profile edit page</h1>
+                    <EditProfileForm />
                 </ProtectedRoute>
             </Route>
 
