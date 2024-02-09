@@ -66,17 +66,12 @@ function EditProfileForm() {
         setSaveSuccess(true);
         setFormErrors([]);
 
-        // if ("password" in formData) {
-        //     setFormData(data => ({
-        //         ...data,
-        //         password: ""
-        //     }));
-        // }
-
-        setFormData(data => ({
-            ...data,
-            password: ""
-        }));
+        if ("password" in formData) {
+            setFormData(data => ({
+                ...data,
+                password: ""
+            }));
+        }
     }
 
     /** Show an alert message on success or failure to update user profile */
