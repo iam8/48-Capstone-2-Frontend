@@ -31,7 +31,7 @@ function SearchBar({searchFor}) {
                             className="visually-hidden"
                             htmlFor="search-input"
                         >
-                            Search for a color by hex value
+                            Search
                         </Label>
 
                         <Input
