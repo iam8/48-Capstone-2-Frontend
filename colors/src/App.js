@@ -90,6 +90,14 @@ function App() {
         setToken(null);
     }
 
+    /**
+     * Search by color hex value.
+     */
+    function searchFor(hex) {
+        console.log("SEARCHING FOR HEX VALUE:", hex);
+    }
+
+
     if (!isUserLoaded) return <div>LOADING...</div>
 
     return (
@@ -98,7 +106,7 @@ function App() {
                 <UserContext.Provider value={{currentUser, setCurrentUser}}>
 
                     <NavBar logout={logout}/>
-                    <Routes login={login} signup={signup}/>
+                    <Routes login={login} signup={signup} searchFor={searchFor}/>
 
                 </UserContext.Provider>
             </BrowserRouter>
