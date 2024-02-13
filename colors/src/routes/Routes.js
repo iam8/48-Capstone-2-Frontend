@@ -6,6 +6,7 @@ import UserAuthForm from "../auth/UserAuthForm";
 import EditProfileForm from "../profile/EditProfileForm";
 import { SIGNUP_FIELDS, LOGIN_FIELDS } from "../auth/formFieldsInfo";
 import useQuery from "../hooks/useQuery";
+import SearchBar from "../shared/SearchBar";
 
 
 /**
@@ -27,7 +28,7 @@ import useQuery from "../hooks/useQuery";
  *
  * Non-matching URLs will redirect to / (home).
  */
-function Routes({login, signup}) {
+function Routes({login, signup, searchFor}) {
     const query = useQuery();
 
     return (
@@ -47,6 +48,7 @@ function Routes({login, signup}) {
             <Route path="/colors">
                 <br></br>
                 <h1>Search for a color here!</h1>
+                <SearchBar searchFor={searchFor}/>
                 <br></br>
                 <div>Is there a query string? {query.size ? "yes" : "no"}</div>
                 {query.size ?
