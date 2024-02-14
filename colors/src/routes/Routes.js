@@ -28,7 +28,7 @@ import SearchBar from "../shared/SearchBar";
  *
  * Non-matching URLs will redirect to / (home).
  */
-function Routes({login, signup, searchColor, genScheme}) {
+function Routes({login, signup, /** searchColor, genScheme */}) {
     const query = useQuery();
 
     return (
@@ -49,9 +49,13 @@ function Routes({login, signup, searchColor, genScheme}) {
                 <br></br>
                 <h1>Search for a color here!</h1>
                 <br></br>
+                TODO: Render color search component, which will display either search bar or
+                color details (other component) depending on presence of query string
                 {query.size ?
-                    <div>Rendering the color info for: {query.toString()}</div> :
-                    <SearchBar searchFor={searchColor}/>}
+                    // Render color details page (a component that will call external API in
+                    // useEffect)
+                    <div>RENDER COLOR DETAILS PAGE FOR URL: /colors/{query.toString()}</div> :
+                    <SearchBar /** searchFor={searchColor} *//>}
                 <br></br>
             </Route>
 
@@ -61,7 +65,7 @@ function Routes({login, signup, searchColor, genScheme}) {
                 <br></br>
                 {query.size ?
                     <div>Rendering the scheme info for: {query.toString()}</div> :
-                    <SearchBar searchFor={genScheme}/>}
+                    <SearchBar /** searchFor={genScheme} *//>}
                 <br></br>
             </Route>
 
