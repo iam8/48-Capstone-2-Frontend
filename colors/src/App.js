@@ -97,6 +97,11 @@ function App() {
         console.log("SEARCHING FOR COLOR WITH HEX VALUE:", hex);
     }
 
+    /** Generate a scheme using the given seed color (hex value). */
+    function generateScheme(hex) {
+        console.log("GENERATING SCHEME FOR SEED COLOR:", hex);
+    }
+
 
     if (!isUserLoaded) return <div>LOADING...</div>
 
@@ -106,7 +111,12 @@ function App() {
                 <UserContext.Provider value={{currentUser, setCurrentUser}}>
 
                     <NavBar logout={logout}/>
-                    <Routes login={login} signup={signup} searchColor={searchColor}/>
+                    <Routes
+                        login={login}
+                        signup={signup}
+                        searchColor={searchColor}
+                        genScheme={generateScheme}
+                    />
 
                 </UserContext.Provider>
             </BrowserRouter>
