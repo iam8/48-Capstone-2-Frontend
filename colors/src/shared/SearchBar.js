@@ -15,7 +15,7 @@ function SearchBar({searchFor}) {
         setSearchValue(evt.target.value);
     }
 
-    /** Call searchFor() to redirect and retrieve color data. */
+    /** Call searchFor() to redirect and retrieve color or scheme data. */
     const handleSubmit = (evt) => {
         evt.preventDefault();
         searchFor(searchValue || undefined);
