@@ -28,7 +28,7 @@ import SearchBar from "../shared/SearchBar";
  *
  * Non-matching URLs will redirect to / (home).
  */
-function Routes({login, signup, searchColor}) {
+function Routes({login, signup, searchColor, genScheme}) {
     const query = useQuery();
 
     return (
@@ -57,13 +57,11 @@ function Routes({login, signup, searchColor}) {
 
             <Route path="/schemes">
                 <br></br>
-                <h1>Search for a scheme here!</h1>
+                <h1>Generate a scheme here!</h1>
                 <br></br>
-                <div>Is there a query string? {query.size ? "yes" : "no"}</div>
                 {query.size ?
-                    "Since there is a query string, render the scheme info!" :
-                    "Since there is no query string, render only the search bar!"}
-                <div>Query string result, from useQuery(): {query.toString()}</div>
+                    <div>Rendering the scheme info for: {query.toString()}</div> :
+                    <SearchBar searchFor={genScheme}/>}
                 <br></br>
             </Route>
 
