@@ -28,7 +28,7 @@ import SearchBar from "../shared/SearchBar";
  *
  * Non-matching URLs will redirect to / (home).
  */
-function Routes({login, signup, searchFor}) {
+function Routes({login, signup, searchColor}) {
     const query = useQuery();
 
     return (
@@ -48,13 +48,10 @@ function Routes({login, signup, searchFor}) {
             <Route path="/colors">
                 <br></br>
                 <h1>Search for a color here!</h1>
-                <SearchBar searchFor={searchFor}/>
                 <br></br>
-                <div>Is there a query string? {query.size ? "yes" : "no"}</div>
                 {query.size ?
-                    "Since there is a query string, render the color info!" :
-                    "Since there is no query string, render only the search bar!"}
-                <div>Query string result, from useQuery(): {query.toString()}</div>
+                    <div>Rendering the color info for: {query.toString()}</div> :
+                    <SearchBar searchFor={searchColor}/>}
                 <br></br>
             </Route>
 
