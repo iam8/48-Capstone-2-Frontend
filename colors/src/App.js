@@ -90,18 +90,24 @@ function App() {
         setToken(null);
     }
 
-    /**
-     * Search for a color by hex value.
-     */
-    function searchColor(hex) {
-        console.log("SEARCHING FOR COLOR WITH HEX VALUE:", hex);
-    }
+    // /**
+    //  * Search for a color by hex value.
+    //  *
+    //  * TODO: PUT THIS FUNCTION DEF IN A 'COLOR DETAILS' COMPONENT. Doesn't really make sense in
+    //  * app component
+    //  */
+    // function searchColor(hex) {
+    //     // Build query string based on given hex
 
-    /** Generate a scheme using the given seed color (hex value). */
-    function generateScheme(hex) {
-        console.log("GENERATING SCHEME FOR SEED COLOR:", hex);
-    }
+    //     // Redirect to /colors/[query string]
 
+    //     console.log("SEARCHING FOR COLOR WITH HEX VALUE:", hex);
+    // }
+
+    // /** Generate a scheme using the given seed color (hex value). */
+    // function generateScheme(hex) {
+    //     console.log("GENERATING SCHEME FOR SEED COLOR:", hex);
+    // }
 
     if (!isUserLoaded) return <div>LOADING...</div>
 
@@ -114,8 +120,8 @@ function App() {
                     <Routes
                         login={login}
                         signup={signup}
-                        searchColor={searchColor}
-                        genScheme={generateScheme}
+                        // searchColor={searchColor}
+                        // genScheme={generateScheme}
                     />
 
                 </UserContext.Provider>
