@@ -37,6 +37,9 @@ function SearchBar({searchFor}) {
                         <Input
                             id="search-input"
                             name="searchValue"
+                            type="search"
+                            minLength={6}
+                            maxLength={6}
                             placeholder="Enter a 6-digit hex value"
                             value={searchValue}
                             onChange={handleChange}
