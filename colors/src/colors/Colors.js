@@ -27,7 +27,7 @@ function Colors() {
 
             {query.size ?
                 <ColorDetails hex={getHexFromQuery()}/>
-                :
+            :
                 <SearchBar onSubmit={redirectToColorDetails} />
             }
         </div>
