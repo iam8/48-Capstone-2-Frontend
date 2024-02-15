@@ -3,11 +3,12 @@ import {Button, Form, Label, Input, Row, Col} from "reactstrap";
 
 
 /**
- * Search bar. Used on /colors and /schemes pages to retrieve color and scheme data.
+ * Search bar. Used exclusively to submit 6-digit hex values.
  *
- * Calls the searchFor method (passed by parent), which performs the data retrieval.
+ * Calls the onSubmit method (passed by parent), which performs some action using the hex value
+ * submitted in the search bar.
  */
-function SearchBar({searchFor}) {
+function SearchBar({onSubmit}) {
     const [searchValue, setSearchValue] = useState("");
 
     /** Update search bar field. */
@@ -15,10 +16,10 @@ function SearchBar({searchFor}) {
         setSearchValue(evt.target.value);
     }
 
-    /** Call searchFor() to redirect and retrieve color or scheme data. */
+    /** Call onSubmit() to perform some action using the submitted hex value. */
     const handleSubmit = (evt) => {
         evt.preventDefault();
-        searchFor(searchValue || undefined);
+        onSubmit(searchValue);
         setSearchValue("");
     }
 
@@ -47,7 +48,7 @@ function SearchBar({searchFor}) {
                         />
                     </Col>
                     <Col>
-                        <Button type="submit" color="primary" size="lg">Retrieve data</Button>
+                        <Button type="submit" color="primary" size="lg">Submit</Button>
                     </Col>
                 </Row>
             </Form>
