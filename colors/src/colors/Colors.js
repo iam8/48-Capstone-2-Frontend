@@ -1,8 +1,9 @@
-import React, {useState} from "react";
+import React from "react";
 import { useHistory } from "react-router-dom";
 
 import useQuery from "../hooks/useQuery";
 import SearchBar from "../shared/SearchBar";
+import ColorDetails from "./ColorDetails";
 
 /**
  * Component to render when route /colors is reached. Displays colors search bar if no query
@@ -16,12 +17,16 @@ function Colors() {
         history.push(`/colors/?hex=${hex}`);
     }
 
+    const getHexFromQuery = () => {
+        return query.get("hex");
+    }
+
     return (
         <div className="Colors">
             <h1>Search for a color!</h1>
 
             {query.size ?
-                <>A query string is present: {query.toString()}</>
+                <ColorDetails hex={getHexFromQuery()}/>
                 :
                 <SearchBar onSubmit={redirectToColorDetails} />
             }
