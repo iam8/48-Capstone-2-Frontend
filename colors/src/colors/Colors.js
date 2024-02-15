@@ -6,8 +6,11 @@ import SearchBar from "../shared/SearchBar";
 import ColorDetails from "./ColorDetails";
 
 /**
- * Component to render when route /colors is reached. Displays colors search bar if no query
- * string exists in current URL, and displays color details if query string exists.
+ * Component to render when route /colors is reached.
+ *
+ * If no query string exists in the current URL, display colors search bar.
+ *
+ * If a query string exists and it contains the 'hex' key, display the details for that color.
  */
 function Colors() {
     const history = useHistory();
@@ -25,7 +28,7 @@ function Colors() {
         <div className="Colors">
             <h1>Search for a color!</h1>
 
-            {query.size ?
+            {query.size && query.has("hex") ?
                 <ColorDetails hex={getHexFromQuery()}/>
             :
                 <SearchBar onSubmit={redirectToColorDetails} />
