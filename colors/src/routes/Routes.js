@@ -7,6 +7,7 @@ import EditProfileForm from "../profile/EditProfileForm";
 import { SIGNUP_FIELDS, LOGIN_FIELDS } from "../auth/formFieldsInfo";
 import useQuery from "../hooks/useQuery";
 import SearchBar from "../shared/SearchBar";
+import Colors from "../colors/Colors";
 
 
 /**
@@ -46,17 +47,7 @@ function Routes({login, signup, /** searchColor, genScheme */}) {
             </Route>
 
             <Route path="/colors">
-                <br></br>
-                <h1>Search for a color here!</h1>
-                <br></br>
-                TODO: Render color search component, which will display either search bar or
-                color details (other component) depending on presence of query string
-                {query.size ?
-                    // Render color details page (a component that will call external API in
-                    // useEffect)
-                    <div>RENDER COLOR DETAILS PAGE FOR URL: /colors/{query.toString()}</div> :
-                    <SearchBar /** searchFor={searchColor} *//>}
-                <br></br>
+                <Colors />
             </Route>
 
             <Route path="/schemes">
