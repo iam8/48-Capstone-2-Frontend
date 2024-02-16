@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import axios from "axios";
 
 
 /**
@@ -13,19 +14,29 @@ import React, {useState, useEffect} from "react";
  *  - colorData (object): data fetched from external API for current color
  */
 function ColorDetails({hex}) {
+    const EXTERN_URL = "https://www.thecolorapi.com/id";
     const [colorData, setColorData] = useState(null);
 
     useEffect(() => {
-        async function fetchColorData() {
-
+        async function fetchColorDataOnMount() {
+            try {
+                const data = await axios.get(`${EXTERN_URL}/?hex=${hex}`);
+                setColorData(data.data);
+                console.log("COLOR DATA RESULT:", data.data);
+            } catch(err) {
+                console.log("ERROR FETCHING COLOR DATA:", err);
+            }
         }
-    })
 
+        fetchColorDataOnMount();
+    }, [hex]);
+
+    if (!colorData) return <div>LOADING...</div>
 
     return (
         <div className="ColorDetails">
             This is in the ColorDetails component.
-            The current color is: {hex}
+            Retrieved hex value of color: {colorData.hex.clean}
         </div>
     );
 }
