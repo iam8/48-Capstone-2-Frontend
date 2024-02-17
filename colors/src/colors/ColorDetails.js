@@ -1,5 +1,8 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useContext} from "react";
+import { Button, List } from "reactstrap";
 import axios from "axios";
+
+import UserContext from "../auth/UserContext";
 
 
 /**
@@ -15,6 +18,7 @@ import axios from "axios";
  */
 function ColorDetails({hex}) {
     const EXTERN_URL = "https://www.thecolorapi.com/id";
+    const {currentUser} = useContext(UserContext);
     const [colorData, setColorData] = useState(null);
 
     useEffect(() => {
@@ -35,8 +39,24 @@ function ColorDetails({hex}) {
 
     return (
         <div className="ColorDetails">
-            This is in the ColorDetails component.
-            Retrieved hex value of color: {colorData.hex.clean}
+
+            <img src={colorData.image.bare} alt={colorData.name.value}/>
+
+            <List>
+                <li>Name: {colorData.name.value}</li>
+                <li>Hex: {colorData.hex.clean}</li>
+                <li>RGB: {colorData.rgb.value.replace("rgb", "")}</li>
+                <li>HSL: {colorData.hsl.value.replace("hsl", "")}</li>
+                <li>HSV: {colorData.hsv.value.replace("hsv", "")}</li>
+                <li>CMYK: {colorData.cmyk.value.replace("cmyk", "")}</li>
+                <li>XYZ: {colorData.XYZ.value.replace("XYZ", "")}</li>
+            </List>
+
+            <div>
+                {currentUser ?
+                    <Button color="primary">Add to a collection (temp button)</Button> : <></>}
+            </div>
+
         </div>
     );
 }
