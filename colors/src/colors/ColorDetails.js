@@ -25,37 +25,30 @@ function ColorDetails({hex}) {
     const {currentUser} = useContext(UserContext);
     const [colorData, setColorData] = useState(null);
     const [collections, setCollections] = useState(null);
+    const [isDataFetched, setIsDataFetched] = useState(false);
 
     useEffect(() => {
-        async function fetchColorDataOnMount() {
-            console.log("FETCHING COLOR DETAILS...");
+
+        /** Fetch color details and collection data for current user (if any). */
+        async function fetchDataOnMount() {
+            let results;
             try {
-                const data = await axios.get(`${EXTERN_URL}/?hex=${hex}`);
-                setColorData(data.data);
-                console.log("COLOR DATA RESULT:", data.data);
+                const requests = [
+                    axios.get(`${EXTERN_URL}/?hex=${hex}`)
+                ];
+
+                if (currentUser) requests.push(ColorsApi.getCollsByUser(currentUser.username));
+                results = await Promise.all(requests);
             } catch(err) {
-                console.log("ERROR FETCHING COLOR DATA:", err);
+                console.log("ERROR FETCHING DATA:", err);
             }
 
-            console.log("COLOR DETAILS LOADED");
+            setColorData(results[0].data);
+            setCollections(results[1]);
+            setIsDataFetched(true);
         }
 
-        async function fetchCollectionsOnMount() {
-            console.log("FETCHING COLLECTIONS DATA...");
-
-            try {
-                const data = await ColorsApi.getCollsByUser(currentUser.username);
-                setCollections(data);
-                console.log("COLLECTIONS DATA RESULT:", data);
-            } catch(err) {
-                console.log("ERROR FETCHING COLLECTIONS:", err);
-            }
-
-            console.log("COLLECTIONS DATA FETCHED");
-        }
-
-        fetchColorDataOnMount();
-        if (currentUser) fetchCollectionsOnMount();
+        fetchDataOnMount();
     }, [hex]);
 
     function displayColorInfo() {
@@ -96,8 +89,7 @@ function ColorDetails({hex}) {
         </>);
     }
 
-    if (!currentUser && !colorData) return <div>LOADING...</div>
-    if (currentUser && (!colorData || !collections)) return <div>LOADING...</div>
+    if (!isDataFetched) return <div>FETCHING DATA...</div>
 
     return (
         <div className="ColorDetails">
