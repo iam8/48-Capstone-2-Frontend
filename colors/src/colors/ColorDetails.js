@@ -31,21 +31,22 @@ function ColorDetails({hex}) {
 
         /** Fetch color details and collection data for current user (if any). */
         async function fetchDataOnMount() {
-            let results;
             try {
                 const requests = [
                     axios.get(`${EXTERN_URL}/?hex=${hex}`)
                 ];
 
                 if (currentUser) requests.push(ColorsApi.getCollsByUser(currentUser.username));
-                results = await Promise.all(requests);
+                // if (currentUser) requests.push(ColorsApi.getCollsByUser("TRIGGER ERROR"));
+
+                const results = await Promise.all(requests);
+
+                setColorData(results[0].data);
+                setCollections(results[1]);
+                setIsDataFetched(true);
             } catch(err) {
                 console.log("ERROR FETCHING DATA:", err);
             }
-
-            setColorData(results[0].data);
-            setCollections(results[1]);
-            setIsDataFetched(true);
         }
 
         fetchDataOnMount();
