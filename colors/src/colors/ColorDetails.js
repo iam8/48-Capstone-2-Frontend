@@ -26,6 +26,7 @@ function ColorDetails({hex}) {
     const [colorData, setColorData] = useState(null);
     const [collections, setCollections] = useState(null);
     const [isDataFetched, setIsDataFetched] = useState(false);
+    const [fetchErrors, setFetchErrors] = useState(null);
 
     useEffect(() => {
 
@@ -46,6 +47,7 @@ function ColorDetails({hex}) {
                 setIsDataFetched(true);
             } catch(err) {
                 console.log("ERROR FETCHING DATA:", err);
+                setFetchErrors(err);
             }
         }
 
@@ -89,6 +91,10 @@ function ColorDetails({hex}) {
             </div>
         </>);
     }
+
+    if (fetchErrors) return <div>
+        ERROR in calling API(s): {fetchErrors[0]}. Please try again later.
+    </div>
 
     if (!isDataFetched) return <div>FETCHING DATA...</div>
 
