@@ -26,13 +26,16 @@ function Colors() {
 
     return (
         <div className="Colors">
-            <h1>Search for a color!</h1>
 
             {query.size && query.has("hex") ?
                 <ColorDetails hex={getHexFromQuery()}/>
             :
-                <SearchBar onSubmit={redirectToColorDetails} />
+                <>
+                    <h1>Search for a color!</h1>
+                    <SearchBar onSubmit={redirectToColorDetails} />
+                </>
             }
+
         </div>
     );
 }
