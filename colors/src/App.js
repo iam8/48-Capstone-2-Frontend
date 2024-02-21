@@ -13,41 +13,69 @@ import NavBar from './navbar/NavBar';
  * Colors application.
  *
  * State:
- *  - isUserLoaded (bool): true if user data has been fetched via API, false otherwise
+ *  - isDataFetched (bool): true if all API data has been fetched, false otherwise
  *  - currentUser (object): data on current user; null if no current user exists
  *  - token (string): authentication token for current user
+ *  - collections (array): data on all collections for current user. Null if there is no
+ *      current user.
+ *  - fetchErrors (array): array of errors that occurred while fetching API data.
  *
  * Renders Routes component.
  */
 function App() {
-    const [isUserLoaded, setIsUserLoaded] = useState(false);
+    const [isDataFetched, setIsDataFetched] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
     const [token, setToken] = useLocalStorage("colors-token");
+    const [collections, setCollections] = useState(null);
+    const [fetchErrors, setFetchErrors] = useState([]);
 
     useEffect(() => {
+        async function fetchAllData() {
 
-        /** Fetch user data from API. */
-        async function fetchCurrentUser() {
-            if (token) {
+            /** Fetch and return user data from API. Return null if there is no current user. */
+            async function fetchCurrentUser() {
+                console.log("FETCHING CURRENT USER...");
+
+                if (token) {
+                    try {
+                        const {username} = jwtDecode(token);
+                        ColorsApi.token = token;
+                        return await ColorsApi.getUser(username);
+                    } catch(err) {
+                        console.log("ERROR FETCHING CURRENT USER:", err);
+                        setFetchErrors((prevErrs) => [...prevErrs, err]);
+                        return null;
+                    }
+                }
+
+                return null;
+            }
+
+            /** Fetch and return collections data for user with given username. */
+            async function fetchCollections(username) {
+                console.log("FETCHING COLLECTIONS DATA FOR", username);
+
                 try {
-                    const {username} = jwtDecode(token);
-                    ColorsApi.token = token;
-                    const user = await ColorsApi.getUser(username);
-                    setCurrentUser(user);
-
+                    return await ColorsApi.getCollsByUser(username);
                 } catch(err) {
-                    console.log("ERROR FETCHING CURRENT USER:", err);
-                    setCurrentUser(null);
+                    console.log(`ERROR FETCHING COLLECTIONS FOR ${username}:`, err);
+                    setFetchErrors((prevErrs) => [...prevErrs, err]);
+                    return null;
                 }
             }
 
-            setIsUserLoaded(true);
+            const user = await fetchCurrentUser();
+            setCurrentUser(user);
+
+            if (user) {
+                setCollections(await fetchCollections(user.username));
+            }
+
+            setIsDataFetched(true);
         }
 
-        console.log("FETCHING CURRENT USER...");
-        setIsUserLoaded(false);
-        fetchCurrentUser();
-
+        setIsDataFetched(false);
+        fetchAllData();
     }, [token]);
 
     /**
@@ -90,29 +118,17 @@ function App() {
         setToken(null);
     }
 
-    // /**
-    //  * Search for a color by hex value.
-    //  *
-    //  * TODO: PUT THIS FUNCTION DEF IN A 'COLOR DETAILS' COMPONENT. Doesn't really make sense in
-    //  * app component
-    //  */
-    // function searchColor(hex) {
-    //     // Build query string based on given hex
+    if (fetchErrors.length) return <div>
+        ERROR in calling API(s): {fetchErrors[0]}. Please try again later.
+    </div>
 
-    //     // Redirect to /colors/[query string]
-
-    //     console.log("SEARCHING FOR COLOR WITH HEX VALUE:", hex);
-    // }
-
-    // /** Generate a scheme using the given seed color (hex value). */
-    // function generateScheme(hex) {
-    //     console.log("GENERATING SCHEME FOR SEED COLOR:", hex);
-    // }
-
-    if (!isUserLoaded) return <div>LOADING...</div>
+    if (!isDataFetched) return <div>FETCHING DATA...</div>
 
     return (
         <div className="App">
+
+            {collections ? <div>Collections set!</div> : <div>Collections not set!</div>}
+
             <BrowserRouter>
                 <UserContext.Provider value={{currentUser, setCurrentUser}}>
 
@@ -120,8 +136,6 @@ function App() {
                     <Routes
                         login={login}
                         signup={signup}
-                        // searchColor={searchColor}
-                        // genScheme={generateScheme}
                     />
 
                 </UserContext.Provider>
