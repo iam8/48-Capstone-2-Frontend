@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useContext} from "react";
+import { useHistory } from "react-router-dom";
 import { Button, List } from "reactstrap";
 import axios from "axios";
 
@@ -22,6 +23,7 @@ import UserContext from "../auth/UserContext";
 function ColorDetails({hex}) {
     const EXTERN_URL = "https://www.thecolorapi.com/id";
 
+    const history = useHistory();
     const {currentUser} = useContext(UserContext);
     const [colorData, setColorData] = useState(null);
     const [collections, setCollections] = useState(null);
@@ -53,6 +55,10 @@ function ColorDetails({hex}) {
 
         fetchDataOnMount();
     }, [hex, currentUser]);
+
+    function backToSearch() {
+        history.push("/colors");
+    }
 
     function displayColorInfo() {
         return (<>
@@ -113,6 +119,10 @@ function ColorDetails({hex}) {
 
             {displayColorInfo()}
             {currentUser ? displayCollectionInfo() : <></>}
+
+            <div>
+                <Button color="secondary" onClick={backToSearch}>Return to color search</Button>
+            </div>
 
         </div>
     );
