@@ -98,7 +98,7 @@ class ColorsApi {
      * Add new color to a collection.
      */
     static async addColor(id, {colorHex}) {
-        let res = await this.request(`collections/${id}`,
+        let res = await this.request(`collections/${id}/colors`,
                                      {colorHex},
                                      "post");
 
