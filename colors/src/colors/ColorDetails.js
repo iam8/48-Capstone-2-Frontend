@@ -60,13 +60,22 @@ function ColorDetails({hex}) {
         history.push("/colors");
     }
 
+    /** Add current color (hex) to the collection with the given ID. */
+    async function addColorToCollection(id) {
+        try {
+            await ColorsApi.addColor(id, {colorHex: hex});
+            console.log(`Successfully added color ${hex} to collection ${id}`);
+        } catch(err) {
+            console.log("ERROR ADDING COLOR TO COLLECTION:", err);
+        }
+    }
+
     function displayColorInfo() {
         return (<>
             <img src={colorData.image.bare} alt={colorData.name.value}/>
 
             <List>
                 <li>Name: {colorData.name.value}</li>
-                <li>Hex: {colorData.hex.clean}</li>
                 <li>RGB: {colorData.rgb.value.replace("rgb", "")}</li>
                 <li>HSL: {colorData.hsl.value.replace("hsl", "")}</li>
                 <li>HSV: {colorData.hsv.value.replace("hsv", "")}</li>
@@ -91,18 +100,22 @@ function ColorDetails({hex}) {
             <List>
                 {collections.map((coll) => {
                     return <li key={coll.id}>
-                        <div>ID: {coll.id}</div>
-                        <List>
-                            <li>Title: {coll.title}</li>
-                            <li>Username: {coll.username}</li>
-                        </List>
+                        <div>
+                            {coll.title}
+                            <Button
+                                color="info"
+                                size="sm"
+                                onClick={() => {addColorToCollection(coll.id)}}>
+                                    Add to this collection
+                            </Button>
+                        </div>
                     </li>
                 })}
             </List>
 
-            <div>
+            {/* <div>
                 <Button color="primary">Add to a collection (temp button)</Button>
-            </div>
+            </div> */}
         </>);
     }
 
