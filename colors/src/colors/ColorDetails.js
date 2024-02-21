@@ -109,6 +109,8 @@ function ColorDetails({hex}) {
     return (
         <div className="ColorDetails">
 
+            <h1>Hex: {hex}</h1>
+
             {displayColorInfo()}
             {currentUser ? displayCollectionInfo() : <></>}
 
