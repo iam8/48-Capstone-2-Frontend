@@ -12,8 +12,6 @@ import UserContext from "../auth/UserContext";
  *
  * Fetches and displays details about the given color.
  *
- * TEMP! If a user is logged in, fetches and displays collection data for that current user.
- *
  * Props
  *  - hex (string): hex value for a color to retrieve data for
  * State
@@ -26,35 +24,28 @@ function ColorDetails({hex}) {
     const history = useHistory();
     const {currentUser} = useContext(UserContext);
     const [colorData, setColorData] = useState(null);
-    const [collections, setCollections] = useState(null);
+    const [collections, setCollections] = useState([]); // TODO: get collections as context or prop from App component
     const [isDataFetched, setIsDataFetched] = useState(false);
     const [fetchErrors, setFetchErrors] = useState(null);
 
     useEffect(() => {
 
-        /** Fetch color details and collection data for current user (if any). */
-        async function fetchDataOnMount() {
+        /** Fetch color details. */
+        async function fetchColorData() {
+            console.log("FETCHING COLOR DATA...");
             try {
-                const requests = [
-                    axios.get(`${EXTERN_URL}/?hex=${hex}`)
-                ];
-
-                if (currentUser) requests.push(ColorsApi.getCollsByUser(currentUser.username));
-                // if (currentUser) requests.push(ColorsApi.getCollsByUser("TRIGGER ERROR"));
-
-                const results = await Promise.all(requests);
-
-                setColorData(results[0].data);
-                setCollections(results[1]);
-                setIsDataFetched(true);
+                const data = await axios.get(`${EXTERN_URL}/?hex=${hex}`);
+                setColorData(data.data);
             } catch(err) {
-                console.log("ERROR FETCHING DATA:", err);
+                console.log("ERROR FETCHING COLOR DATA:", err);
                 setFetchErrors(err);
             }
+
+            setIsDataFetched(true);
         }
 
-        fetchDataOnMount();
-    }, [hex, currentUser]);
+        fetchColorData();
+    }, [hex]);
 
     function backToSearch() {
         history.push("/colors");
@@ -112,10 +103,6 @@ function ColorDetails({hex}) {
                     </li>
                 })}
             </List>
-
-            {/* <div>
-                <Button color="primary">Add to a collection (temp button)</Button>
-            </div> */}
         </>);
     }
 
