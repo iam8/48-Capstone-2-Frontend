@@ -52,7 +52,7 @@ function ColorDetails({hex}) {
         }
 
         fetchDataOnMount();
-    }, [hex]);
+    }, [hex, currentUser]);
 
     function displayColorInfo() {
         return (<>
@@ -71,6 +71,14 @@ function ColorDetails({hex}) {
     }
 
     function displayCollectionInfo() {
+        if (!collections.length) {
+            return (<>
+                <div>
+                    You have no collections.
+                </div>
+            </>);
+        }
+
         return (<>
             <div>Collection data:</div>
 
