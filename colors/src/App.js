@@ -7,6 +7,7 @@ import Routes from './routes/Routes';
 import UserContext from './auth/UserContext';
 import useLocalStorage from './hooks/useLocalStorage';
 import NavBar from './navbar/NavBar';
+import CollectionsContext from "./collections/CollectionsContext";
 
 
 /**
@@ -127,17 +128,17 @@ function App() {
     return (
         <div className="App">
 
-            {collections ? <div>Collections set!</div> : <div>Collections not set!</div>}
-
             <BrowserRouter>
                 <UserContext.Provider value={{currentUser, setCurrentUser}}>
+                    <CollectionsContext.Provider value={{collections}}>
 
-                    <NavBar logout={logout}/>
-                    <Routes
-                        login={login}
-                        signup={signup}
-                    />
+                        <NavBar logout={logout}/>
+                        <Routes
+                            login={login}
+                            signup={signup}
+                        />
 
+                    </CollectionsContext.Provider>
                 </UserContext.Provider>
             </BrowserRouter>
         </div>
