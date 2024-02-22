@@ -119,6 +119,8 @@ function App() {
         setToken(null);
     }
 
+    // RENDER -------------------------------------------------------------------------------------
+
     if (fetchErrors.length) return <div>
         ERROR in calling API(s): {fetchErrors[0]}. Please try again later.
     </div>
