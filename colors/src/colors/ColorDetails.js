@@ -5,6 +5,7 @@ import axios from "axios";
 
 import ColorsApi from "../api";
 import UserContext from "../auth/UserContext";
+import CollectionsContext from "../collections/CollectionsContext";
 
 
 /**
@@ -16,17 +17,20 @@ import UserContext from "../auth/UserContext";
  *  - hex (string): hex value for a color to retrieve data for
  * State
  *  - colorData (object): data fetched from external API for current color
- *  - TEMP! collections (list): all collections data fetched for current user, if any
+ *  - isDataFetched (bool): true if color data has been fetched, false otherwise
+ *  - fetchErrors (object): contains error info if API call failed; null otherwise
  */
 function ColorDetails({hex}) {
     const EXTERN_URL = "https://www.thecolorapi.com/id";
 
     const history = useHistory();
     const {currentUser} = useContext(UserContext);
+    const {collections} = useContext(CollectionsContext);
     const [colorData, setColorData] = useState(null);
-    const [collections, setCollections] = useState([]); // TODO: get collections as context or prop from App component
     const [isDataFetched, setIsDataFetched] = useState(false);
     const [fetchErrors, setFetchErrors] = useState(null);
+
+    console.log("RENDERING ColorDetails COMPONENT");
 
     useEffect(() => {
 
