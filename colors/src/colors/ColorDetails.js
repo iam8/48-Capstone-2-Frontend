@@ -51,6 +51,7 @@ function ColorDetails({hex}) {
         fetchColorData();
     }, [hex]);
 
+    /** Return to colors search bar. */
     function backToSearch() {
         history.push("/colors");
     }
@@ -65,6 +66,7 @@ function ColorDetails({hex}) {
         }
     }
 
+    /** Display details on current color. */
     function displayColorInfo() {
         return (<>
             <img src={colorData.image.bare} alt={colorData.name.value}/>
@@ -80,6 +82,7 @@ function ColorDetails({hex}) {
         </>);
     }
 
+    /** Display details on collections of current user, if current user exists. */
     function displayCollectionInfo() {
         if (!collections.length) {
             return (<>
@@ -109,6 +112,8 @@ function ColorDetails({hex}) {
             </List>
         </>);
     }
+
+    // RENDER -------------------------------------------------------------------------------------
 
     if (fetchErrors) return <div>
         ERROR in calling API(s): {fetchErrors[0]}. Please try again later.
