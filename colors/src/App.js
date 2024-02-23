@@ -19,7 +19,7 @@ import CollectionsContext from "./collections/CollectionsContext";
  *  - token (string): authentication token for current user
  *  - collections (array): data on all collections for current user. Null if there is no
  *      current user.
- *  - fetchErrors (array): array of errors that occurred while fetching user data.
+ *  - errors (array): array of errors that occurred during API calls
  *
  * Renders Routes component.
  */
@@ -30,7 +30,7 @@ function App() {
     const [currentUser, setCurrentUser] = useState(null);
     const [token, setToken] = useLocalStorage("colors-token");
     const [collections, setCollections] = useState(null);
-    const [fetchErrors, setFetchErrors] = useState(null);
+    const [errors, setErrors] = useState(null);
 
     useEffect(() => {
         async function fetchAllData() {
@@ -46,7 +46,7 @@ function App() {
                         return await ColorsApi.getUser(username);
                     } catch(err) {
                         console.log("ERROR FETCHING CURRENT USER:", err);
-                        setFetchErrors(err);
+                        setErrors(err);
                     }
                 }
 
@@ -67,6 +67,8 @@ function App() {
         setIsDataFetched(false);
         fetchAllData();
     }, [token]);
+
+    // AUTH FUNCTIONALITY -------------------------------------------------------------------------
 
     /**
      * Sign up user with given user data: {username, password, firstName, lastName}.
@@ -108,10 +110,27 @@ function App() {
         setToken(null);
     }
 
+    //---------------------------------------------------------------------------------------------
+
+    // COLLECTIONS FUNCTIONALITY ------------------------------------------------------------------
+
+    /** Add a color (hex) to the collection with the given ID. */
+    async function addColor(hex, id) {
+        try {
+            await ColorsApi.addColor(id, {colorHex: hex});
+            // Update collections in state here
+            console.log(`Successfully added color ${hex} to collection ${id}`);
+        } catch(err) {
+            console.log("ERROR ADDING COLOR TO COLLECTION:", err);
+        }
+    }
+
+    //---------------------------------------------------------------------------------------------
+
     // RENDER -------------------------------------------------------------------------------------
 
-    if (fetchErrors) return <div>
-        ERROR in calling API(s): {fetchErrors}.
+    if (errors) return <div>
+        ERROR in calling API(s): {errors}.
     </div>
 
     if (!isDataFetched) return <div>FETCHING DATA...</div>
@@ -121,7 +140,7 @@ function App() {
 
             <BrowserRouter>
                 <UserContext.Provider value={{currentUser, setCurrentUser}}>
-                    <CollectionsContext.Provider value={{collections}}>
+                    <CollectionsContext.Provider value={{collections, addColor}}>
 
                         <NavBar logout={logout}/>
                         <Routes
