@@ -14,12 +14,12 @@ import CollectionsContext from "./collections/CollectionsContext";
  * Colors application.
  *
  * State:
- *  - isDataFetched (bool): true if all API data has been fetched, false otherwise
+ *  - isDataFetched (bool): true if user data has been fetched, false otherwise
  *  - currentUser (object): data on current user; null if no current user exists
  *  - token (string): authentication token for current user
  *  - collections (array): data on all collections for current user. Null if there is no
  *      current user.
- *  - fetchErrors (array): array of errors that occurred while fetching API data.
+ *  - fetchErrors (array): array of errors that occurred while fetching user data.
  *
  * Renders Routes component.
  */
@@ -47,31 +47,17 @@ function App() {
                     } catch(err) {
                         console.log("ERROR FETCHING CURRENT USER:", err);
                         setFetchErrors(err);
-                        return null;
                     }
                 }
 
                 return null;
             }
 
-            /** Fetch and return collections data for user with given username. */
-            async function fetchCollections(username) {
-                console.log("FETCHING COLLECTIONS DATA FOR", username);
-
-                try {
-                    return await ColorsApi.getCollsByUser(username);
-                } catch(err) {
-                    console.log(`ERROR FETCHING COLLECTIONS FOR ${username}:`, err);
-                    setFetchErrors(err);
-                    return null;
-                }
-            }
-
             const user = await fetchCurrentUser();
             setCurrentUser(user);
 
             if (user) {
-                setCollections(await fetchCollections(user.username));
+                setCollections(user.collections);
             }
 
             setIsDataFetched(true);
