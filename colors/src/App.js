@@ -24,11 +24,13 @@ import CollectionsContext from "./collections/CollectionsContext";
  * Renders Routes component.
  */
 function App() {
+    console.log("RENDERING App...");
+
     const [isDataFetched, setIsDataFetched] = useState(false);
     const [currentUser, setCurrentUser] = useState(null);
     const [token, setToken] = useLocalStorage("colors-token");
     const [collections, setCollections] = useState(null);
-    const [fetchErrors, setFetchErrors] = useState([]);
+    const [fetchErrors, setFetchErrors] = useState(null);
 
     useEffect(() => {
         async function fetchAllData() {
@@ -44,7 +46,7 @@ function App() {
                         return await ColorsApi.getUser(username);
                     } catch(err) {
                         console.log("ERROR FETCHING CURRENT USER:", err);
-                        setFetchErrors((prevErrs) => [...prevErrs, err]);
+                        setFetchErrors(err);
                         return null;
                     }
                 }
@@ -60,7 +62,7 @@ function App() {
                     return await ColorsApi.getCollsByUser(username);
                 } catch(err) {
                     console.log(`ERROR FETCHING COLLECTIONS FOR ${username}:`, err);
-                    setFetchErrors((prevErrs) => [...prevErrs, err]);
+                    setFetchErrors(err);
                     return null;
                 }
             }
@@ -121,8 +123,8 @@ function App() {
 
     // RENDER -------------------------------------------------------------------------------------
 
-    if (fetchErrors.length) return <div>
-        ERROR in calling API(s): {fetchErrors[0]}. Please try again later.
+    if (fetchErrors) return <div>
+        ERROR in calling API(s): {fetchErrors}.
     </div>
 
     if (!isDataFetched) return <div>FETCHING DATA...</div>
