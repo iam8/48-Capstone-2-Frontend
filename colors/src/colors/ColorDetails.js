@@ -25,7 +25,7 @@ function ColorDetails({hex}) {
 
     const history = useHistory();
     const {currentUser} = useContext(UserContext);
-    const {collections} = useContext(CollectionsContext);
+    const {collections, addColor} = useContext(CollectionsContext);
     const [colorData, setColorData] = useState(null);
     const [isDataFetched, setIsDataFetched] = useState(false);
     const [fetchErrors, setFetchErrors] = useState(null);
@@ -54,17 +54,6 @@ function ColorDetails({hex}) {
     /** Return to colors search bar. */
     function backToSearch() {
         history.push("/colors");
-    }
-
-    /** Add current color (hex) to the collection with the given ID. */
-    async function addColorToCollection(id) {
-        try {
-            await ColorsApi.addColor(id, {colorHex: hex});
-            console.log(`Successfully added color ${hex} to collection ${id}`);
-        } catch(err) {
-            console.log("ERROR ADDING COLOR TO COLLECTION:", err);
-            setFetchErrors(err);
-        }
     }
 
     /** Display details on current color. */
@@ -104,7 +93,7 @@ function ColorDetails({hex}) {
                             <Button
                                 color="info"
                                 size="sm"
-                                onClick={() => {addColorToCollection(coll.id)}}>
+                                onClick={() => {addColor(hex, coll.id)}}>
                                     Add to this collection
                             </Button>
                         </div>
