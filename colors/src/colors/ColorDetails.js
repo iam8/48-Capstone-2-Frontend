@@ -30,7 +30,7 @@ function ColorDetails({hex}) {
     const [isDataFetched, setIsDataFetched] = useState(false);
     const [fetchErrors, setFetchErrors] = useState(null);
 
-    console.log("RENDERING ColorDetails COMPONENT");
+    console.log("RENDERING ColorDetails...");
 
     useEffect(() => {
 
@@ -63,6 +63,7 @@ function ColorDetails({hex}) {
             console.log(`Successfully added color ${hex} to collection ${id}`);
         } catch(err) {
             console.log("ERROR ADDING COLOR TO COLLECTION:", err);
+            setFetchErrors(err);
         }
     }
 
@@ -116,7 +117,7 @@ function ColorDetails({hex}) {
     // RENDER -------------------------------------------------------------------------------------
 
     if (fetchErrors) return <div>
-        ERROR in calling API(s): {fetchErrors[0]}. Please try again later.
+        ERROR in calling API(s): {fetchErrors.message ? fetchErrors.message : fetchErrors}.
     </div>
 
     if (!isDataFetched) return <div>FETCHING DATA...</div>
