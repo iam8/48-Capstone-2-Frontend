@@ -53,6 +53,7 @@ function App() {
                 return null;
             }
 
+            // Fetch and set current user and their collections, if current user is found
             const user = await fetchCurrentUser();
             setCurrentUser(user);
 
