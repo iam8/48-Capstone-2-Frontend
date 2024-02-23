@@ -33,6 +33,8 @@ function App() {
     const [errors, setErrors] = useState(null);
 
     useEffect(() => {
+        console.log("In App useEffect()");
+
         async function fetchAllData() {
 
             /** Fetch and return user data from API. Return null if there is no current user. */
@@ -116,9 +118,11 @@ function App() {
 
     /** Add a color (hex) to the collection with the given ID. */
     async function addColor(hex, id) {
+        console.log("IN addColor(). Collections before adding:", collections);
         try {
             await ColorsApi.addColor(id, {colorHex: hex});
             // Update collections in state here
+
             console.log(`Successfully added color ${hex} to collection ${id}`);
         } catch(err) {
             console.log("ERROR ADDING COLOR TO COLLECTION:", err);
