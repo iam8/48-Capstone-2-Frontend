@@ -101,7 +101,7 @@ function ColorDetails({hex}) {
                                     {"Colors: "}
                                     {coll.colors.map((hex) => {
                                         return <ListInlineItem key={hex}>
-                                            {`| ${hex} |`}
+                                            {`| ${hex.toUpperCase()} |`}
                                         </ListInlineItem>
                                     })}
                                 </List>
@@ -124,7 +124,7 @@ function ColorDetails({hex}) {
     return (
         <div className="ColorDetails">
 
-            <h1>Hex: {hex}</h1>
+            <h1>Hex: {hex.toUpperCase()}</h1>
 
             {displayColorInfo()}
 
