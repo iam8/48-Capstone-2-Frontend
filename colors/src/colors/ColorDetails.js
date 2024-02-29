@@ -1,9 +1,8 @@
 import React, {useState, useEffect, useContext} from "react";
 import { useHistory } from "react-router-dom";
-import { Button, List } from "reactstrap";
+import { Button, List, ListInlineItem } from "reactstrap";
 import axios from "axios";
 
-import ColorsApi from "../api";
 import UserContext from "../auth/UserContext";
 import CollectionsContext from "../collections/CollectionsContext";
 
@@ -96,6 +95,17 @@ function ColorDetails({hex}) {
                                 onClick={() => {addColor(hex, coll.id)}}>
                                     Add to this collection
                             </Button>
+
+                            <div>
+                                <List type="inline">
+                                    {"Colors: "}
+                                    {coll.colors.map((hex) => {
+                                        return <ListInlineItem key={hex}>
+                                            {`| ${hex} |`}
+                                        </ListInlineItem>
+                                    })}
+                                </List>
+                            </div>
                         </div>
                     </li>
                 })}
@@ -117,12 +127,12 @@ function ColorDetails({hex}) {
             <h1>Hex: {hex}</h1>
 
             {displayColorInfo()}
-            {currentUser ? displayCollectionInfo() : <></>}
 
             <div>
                 <Button color="secondary" onClick={backToSearch}>Return to color search</Button>
             </div>
 
+            {currentUser ? displayCollectionInfo() : <></>}
         </div>
     );
 }
