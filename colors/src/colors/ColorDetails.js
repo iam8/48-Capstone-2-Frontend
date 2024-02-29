@@ -119,7 +119,11 @@ function ColorDetails({hex}) {
         ERROR in calling API(s): {fetchErrors.message ? fetchErrors.message : fetchErrors}.
     </div>
 
-    if (!isDataFetched) return <Spinner color="primary">FETCHING COLOR DATA...</Spinner>
+    if (!isDataFetched) {
+        return <Spinner color="primary" className="m-5">
+                    FETCHING COLOR DATA...
+                </Spinner>
+    }
 
     return (
         <div className="ColorDetails">

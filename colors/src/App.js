@@ -150,7 +150,11 @@ function App() {
         ERROR FETCHING DATA: {errors}.
     </div>
 
-    if (!isDataFetched) return <Spinner color="primary">FETCHING USER DATA...</Spinner>
+    if (!isDataFetched) {
+        return <Spinner color="primary" className='m-5'>
+                    FETCHING USER DATA...
+                </Spinner>
+    }
 
     return (
         <div className="App">
