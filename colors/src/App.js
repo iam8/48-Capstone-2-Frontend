@@ -19,7 +19,7 @@ import CollectionsContext from "./collections/CollectionsContext";
  *  - token (string): authentication token for current user
  *  - collections (array): data on all collections for current user. Null if there is no
  *      current user.
- *  - errors (array): array of errors that occurred during API calls
+ *  - errors (array): array of errors that occurred during data fetching
  *
  * Renders Routes component.
  */
@@ -116,16 +116,28 @@ function App() {
 
     // COLLECTIONS FUNCTIONALITY ------------------------------------------------------------------
 
-    /** Add a color (hex) to the collection with the given ID. */
+    /**
+     * Add a color (hex) to the collection with the given ID.
+     *
+     * Return {success: true} on success and {success: false, err} on failure.
+     */
     async function addColor(hex, id) {
-        console.log("IN addColor(). Collections before adding:", collections);
         try {
             await ColorsApi.addColor(id, {colorHex: hex});
-            // Update collections in state here
+
+            // Update collections in state with new color
+            // TODO: put all collection datastructure updates into helper fxns
+            const updatedColls = collections.map((coll) => (
+                coll.id === id ? {...coll, colors: [...coll.colors, hex]} : coll
+            ));
+
+            setCollections(updatedColls);
 
             console.log(`Successfully added color ${hex} to collection ${id}`);
+            return {success: true};
         } catch(err) {
             console.log("ERROR ADDING COLOR TO COLLECTION:", err);
+            return {success: false, err};
         }
     }
 
@@ -134,7 +146,7 @@ function App() {
     // RENDER -------------------------------------------------------------------------------------
 
     if (errors) return <div>
-        ERROR in calling API(s): {errors}.
+        ERROR FETCHING DATA: {errors}.
     </div>
 
     if (!isDataFetched) return <div>FETCHING DATA...</div>
