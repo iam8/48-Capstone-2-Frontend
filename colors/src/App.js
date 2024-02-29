@@ -61,9 +61,6 @@ function App() {
 
             if (user) {
                 setCollections(user.collections);
-
-                // TODO: for each collection, fetch Color data using API and load into state
-                // TODO: Write a function for this (async in useEffect, like before)
             }
 
             setIsDataFetched(true);
