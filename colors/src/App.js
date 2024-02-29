@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {BrowserRouter} from "react-router-dom";
 import {jwtDecode} from "jwt-decode";
+import { Spinner } from 'reactstrap';
 
 import ColorsApi from './api';
 import Routes from './routes/Routes';
@@ -149,7 +150,7 @@ function App() {
         ERROR FETCHING DATA: {errors}.
     </div>
 
-    if (!isDataFetched) return <div>FETCHING DATA...</div>
+    if (!isDataFetched) return <Spinner color="primary">FETCHING USER DATA...</Spinner>
 
     return (
         <div className="App">

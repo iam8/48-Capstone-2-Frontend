@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext} from "react";
 import { useHistory } from "react-router-dom";
-import { Button, List, ListInlineItem } from "reactstrap";
+import { Button, List, ListInlineItem, Spinner } from "reactstrap";
 import axios from "axios";
 
 import UserContext from "../auth/UserContext";
@@ -119,7 +119,7 @@ function ColorDetails({hex}) {
         ERROR in calling API(s): {fetchErrors.message ? fetchErrors.message : fetchErrors}.
     </div>
 
-    if (!isDataFetched) return <div>FETCHING DATA...</div>
+    if (!isDataFetched) return <Spinner color="primary">FETCHING COLOR DATA...</Spinner>
 
     return (
         <div className="ColorDetails">
