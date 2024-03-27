@@ -12,6 +12,9 @@ import CollectionsContext from "../collections/CollectionsContext";
  *
  * Fetches and displays details about the given color.
  *
+ * (TEMP) Displays collection data for current user and allows user to add current color to any
+ *      collection.
+ *
  * Props
  *  - hex (string): hex value for a color to retrieve data for
  * State
